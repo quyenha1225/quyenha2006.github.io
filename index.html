@@ -18,10 +18,11 @@
             position: relative;
         }
 
+        /* --- NỀN TRĂNG SAO --- */
         .moon {
             position: absolute;
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             background: #fdfae3;
             border-radius: 50%;
             box-shadow: 0 0 40px #fdfae3, 0 0 80px rgba(253, 250, 227, 0.5); 
@@ -42,16 +43,17 @@
         }
         .firework {
             position: absolute;
-            width: 10px;
-            height: 10px;
+            width: 6px;
+            height: 6px;
             background-color: white; 
             border-radius: 50%;
             opacity: 0;
             animation: fireworkExplode 1.5s forwards ease-out;
-            box-shadow: 0 0 5px white;
+            box-shadow: 0 0 10px white;
             z-index: 20; 
         }
 
+        /* --- TEXT --- */
         .message-container {
             position: relative;
             z-index: 10;
@@ -63,105 +65,110 @@
         }
 
         .message {
-            font-size: 2.5em; 
+            font-size: 2.2em; 
             margin-bottom: 30px;
             animation: rainbowText 5s infinite linear; 
             text-shadow: 0 0 15px rgba(255, 255, 255, 0.7); 
-            background: linear-gradient(to right,
-                #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+            background: linear-gradient(to right, #ff0066, #ff5e00, #ffea00, #00ff2a, #00ddff, #8800ff, #ff00d4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-weight: bold;
+            padding: 0 20px;
         }
         
         .click-prompt {
             color: #fff;
-            font-size: 1.2em;
-            margin-top: 20px;
+            font-size: 1.1em;
+            margin-top: 25px;
             opacity: 0;
             animation: fadeIn 2s forwards 6s; 
             text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
         }
         
-        #giftMessage {
-            display: none; 
+        #giftMessage { display: none; }
+
+        /* --- TRÁI TIM HẠT LI TI (MAGIC PARTICLE HEART) --- */
+        
+        .heart-wrapper {
+            display: inline-block;
+            position: relative;
+            width: 220px; 
+            height: 220px; 
+            cursor: pointer;
+            /* Nhịp tim đập thình thịch */
+            animation: heartbeat 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1); 
         }
 
-        /* --- TRÁI TIM ẢNH ĐƯỢC CẮT (MASKING) VÀ VIỀN TRÁI TIM NHỎ --- */
-        .heart-effect-container {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            display: inline-block;
-            margin: 0 auto;
+        /* Lớp vỏ hạt phát sáng bao quanh */
+        .heart-wrapper::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: transparent;
+            /* Tạo hình trái tim bằng mask */
+            -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>");
+            mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>");
+            -webkit-mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+            
+            /* Đổ bóng dày đặc để tạo hiệu ứng hạt li ti */
+            box-shadow: inset 0 0 20px #ff0066;
+            background: radial-gradient(circle, rgba(255,0,102,0.8) 0%, rgba(0,0,0,0) 70%);
+            z-index: 1;
         }
-        .heart-image-wrapper {
-            width: 100%;
-            height: 100%;
-        }
+        
+        /* Ảnh cô ấy */
         .photo-heart-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* Mask trái tim */
-            -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><path d='M100 180 C 20 110, 90 30, 100 60 C 110 30, 180 110, 100 180 Z'/></svg>");
-            mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><path d='M100 180 C 20 110, 90 30, 100 60 C 110 30, 180 110, 100 180 Z'/></svg>");
-            -webkit-mask-size: 100% 100%;
-            mask-size: 100% 100%;
+            
+            /* Cắt ảnh thành hình tim */
+            -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>");
+            mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>");
+            -webkit-mask-size: contain;
             -webkit-mask-repeat: no-repeat;
-            mask-repeat: no-repeat;
             -webkit-mask-position: center;
-            mask-position: center;
-        }
-        #hearts-border-svg {
-            position: absolute;
-            left: 0;
-            top: 0;
-            pointer-events: none;
+
+            /* HIỆU ỨNG HẠT BỤI HỒNG LẤP LÁNH XUNG QUANH */
+            /* Kết hợp nhiều lớp bóng để tạo độ dày và cảm giác hạt */
+            filter: drop-shadow(0 0 5px #ff0066) 
+                    drop-shadow(0 0 10px #ff3399) 
+                    drop-shadow(0 0 15px #ff66b2)
+                    brightness(1.1);
+            
+            position: relative;
             z-index: 2;
         }
 
-        @keyframes steadyBeat {
+        /* --- ANIMATIONS --- */
+        @keyframes heartbeat {
              0% { transform: scale(1); }
-             14% { transform: scale(1.1); }
+             14% { transform: scale(1.15); }
              28% { transform: scale(1); }
-             42% { transform: scale(1.1); }
+             42% { transform: scale(1.15); }
              70% { transform: scale(1); }
         }
-        @keyframes fadeInMoon {
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 0.7; transform: scale(1); }
-        }
-        @keyframes fadeInMessage {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes rainbowText {
-            0% { filter: hue-rotate(0deg); }
-            100% { filter: hue-rotate(360deg); }
-        }
+        @keyframes fadeInMoon { from { opacity: 0; transform: scale(0.8); } to { opacity: 0.7; transform: scale(1); } }
+        @keyframes fadeInMessage { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes rainbowText { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(360deg); } }
         @keyframes twinkle {
             0% { transform: translate(var(--x-start), var(--y-start)) scale(0); opacity: 0; }
-            10% { opacity: 1; transform: translate(var(--x-mid), var(--y-mid)) scale(1); }
-            90% { opacity: 1; transform: translate(var(--x-end), var(--y-end)) scale(0.5); }
+            50% { opacity: 1; }
             100% { opacity: 0; transform: translate(var(--x-end), var(--y-end)) scale(0); }
         }
-        @keyframes fadeOut {
-            from { opacity: 1; transform: translateY(0); }
-            to { opacity: 0; transform: translateY(-20px); }
-        }
+        @keyframes fadeOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-20px); } }
         @keyframes fireworkExplode {
             0% { transform: translate(var(--fx), var(--fy)) scale(0); opacity: 1; }
             100% { transform: translate(var(--tx), var(--ty)) scale(1); opacity: 0; }
         }
         
+        /* RESPONSIVE */
         @media only screen and (max-width: 768px) {
-            .message { font-size: 1.6em; margin-bottom: 20px; padding: 0 10px; }
-            .heart-effect-container { width: 150px; height: 150px; }
-            .heart-image-wrapper { width: 100%; height: 100%; }
-            .click-prompt { font-size: 1em; margin-top: 15px; }
-            #giftMessage .message { font-size: 1.8em; }
+            .message { font-size: 1.5em; }
+            .heart-wrapper { width: 180px; height: 180px; }
             .moon { width: 80px; height: 80px; }
-            #hearts-border-svg { width: 150px; height: 150px; }
         }
     </style>
 </head>
@@ -170,94 +177,52 @@
 
     <div class="message-container" id="firstMessage">
         <div class="message">Anh yêu em nhiều vãi Hoàng Anh à, nên em vui lên nhé!</div>
-        <div class="heart-effect-container">
-            <div class="heart-image-wrapper">
-                <img src="trai-tim-hoang-anh.png.jpg" alt="Trái tim hạt" class="photo-heart-img">
-            </div>
-            <svg id="hearts-border-svg" width="200" height="200">
-                <path id="main-heart-path"
-                    d="M100 180 C 20 110, 90 30, 100 60 C 110 30, 180 110, 100 180 Z"
-                    fill="none" stroke="transparent"/>
-            </svg>
+        <div class="heart-wrapper" style="cursor: default;">
+            <img src="trai-tim-hoang-anh.png.jpg" alt="Trái tim hạt" class="photo-heart-img">
         </div>
     </div>
 
     <div class="message-container" id="secondMessage" style="display: none;">
         <div class="message" style="font-size: 2.2em;">Anh thương em lắm nên đừng bỏ rơi anh nhé!</div>
-        <div id="clickableHeart" class="heart-effect-container" style="cursor: pointer;">
-            <div class="heart-image-wrapper">
-                <img src="trai-tim-hoang-anh.png.jpg" alt="Nhấn vào tim" class="photo-heart-img">
-            </div>
-            <svg id="hearts-border-svg-2" width="200" height="200">
-                <path id="main-heart-path-2"
-                    d="M100 180 C 20 110, 90 30, 100 60 C 110 30, 180 110, 100 180 Z"
-                    fill="none" stroke="transparent"/>
-            </svg>
+        <div id="clickableHeart" class="heart-wrapper">
+            <img src="trai-tim-hoang-anh.png.jpg" alt="Nhấn vào tim" class="photo-heart-img">
         </div>
         <div class="click-prompt">Hãy nhấn vào trái tim để nhận quà từ anh ❤️</div>
     </div>
     
     <div id="giftMessage" class="message-container">
-        <div class="message" style="margin-bottom: 10px;">Xin thông báo, bạn đã nhận được</div>
+        <div class="message">Xin thông báo, bạn đã nhận được</div>
         <div class="message">Anh Quyền đẹp trai luôn yêu thương bạn!</div>
-        <div class="heart-effect-container" style="transform: scale(1.3); cursor: default;">
-            <div class="heart-image-wrapper">
-                <img src="trai-tim-hoang-anh.png.jpg" alt="Trái tim yêu thương" class="photo-heart-img">
-            </div>
-            <svg id="hearts-border-svg-3" width="200" height="200">
-                <path id="main-heart-path-3"
-                    d="M100 180 C 20 110, 90 30, 100 60 C 110 30, 180 110, 100 180 Z"
-                    fill="none" stroke="transparent"/>
-            </svg>
+        <div class="heart-wrapper" style="transform: scale(1.3); cursor: default;">
+             <img src="trai-tim-hoang-anh.png.jpg" alt="Trái tim yêu thương" class="photo-heart-img">
         </div>
     </div>
 
     <script>
-        // Viền trái tim hồng xung quanh ảnh
-        function makeHeartBorder(svgId, pathId, numHearts = 36) {
-            const svg = document.getElementById(svgId);
-            const path = document.getElementById(pathId);
-            if (!svg || !path) return;
-            const pathLength = path.getTotalLength();
-            for (let i = 0; i < numHearts; i++) {
-                const p = path.getPointAtLength(i / numHearts * pathLength);
-                const smallHeart = document.createElementNS("http://www.w3.org/2000/svg", "text");
-                smallHeart.setAttribute("x", p.x);
-                smallHeart.setAttribute("y", p.y);
-                smallHeart.setAttribute("fill", "#ff69b4");
-                smallHeart.setAttribute("font-size", "18");
-                smallHeart.setAttribute("text-anchor", "middle");
-                smallHeart.setAttribute("alignment-baseline", "middle");
-                smallHeart.textContent = "❤";
-                svg.appendChild(smallHeart);
-            }
+        // TẠO SAO
+        const numStars = 150; 
+        for (let i = 0; i < numStars; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            const size = Math.random() * 3 + 1; 
+            star.style.width = star.style.height = `${size}px`;
+            const startX = Math.random() * window.innerWidth; const startY = Math.random() * window.innerHeight;
+            const midX = Math.random() * window.innerWidth; const midY = Math.random() * window.innerHeight;
+            const endX = Math.random() * window.innerWidth; const endY = Math.random() * window.innerHeight;
+            star.style.setProperty('--x-start', `${startX}px`); star.style.setProperty('--y-start', `${startY}px`);
+            star.style.setProperty('--x-mid', `${midX}px`); star.style.setProperty('--y-mid', `${midY}px`);
+            star.style.setProperty('--x-end', `${endX}px`); star.style.setProperty('--y-end', `${endY}px`);
+            star.style.animationDelay = `${Math.random() * 6}s`;
+            star.style.animationDuration = `${Math.random() * 5 + 7}s`;
+            document.body.appendChild(star);
         }
-        document.addEventListener("DOMContentLoaded", function() {
-            makeHeartBorder('hearts-border-svg','main-heart-path',36);
-            makeHeartBorder('hearts-border-svg-2','main-heart-path-2',36);
-            makeHeartBorder('hearts-border-svg-3','main-heart-path-3',36);
 
-            // Stars and firework code giữ nguyên
-            const numStars = 150; 
-            for (let i = 0; i < numStars; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-                const size = Math.random() * 3 + 1; 
-                star.style.width = star.style.height = `${size}px`;
-                const startX = Math.random() * window.innerWidth; const startY = Math.random() * window.innerHeight;
-                const midX = Math.random() * window.innerWidth; const midY = Math.random() * window.innerHeight;
-                const endX = Math.random() * window.innerWidth; const endY = Math.random() * window.innerHeight;
-                star.style.setProperty('--x-start', `${startX}px`); star.style.setProperty('--y-start', `${startY}px`);
-                star.style.setProperty('--x-mid', `${midX}px`); star.style.setProperty('--y-mid', `${midY}px`);
-                star.style.setProperty('--x-end', `${endX}px`); star.style.setProperty('--y-end', `${endY}px`);
-                star.style.animationDelay = `${Math.random() * 6}s`;
-                star.style.animationDuration = `${Math.random() * 5 + 7}s`;
-                document.body.appendChild(star);
-            }
+        document.addEventListener('DOMContentLoaded', () => {
             const firstMessage = document.getElementById('firstMessage');
             const secondMessage = document.getElementById('secondMessage');
             const clickableHeart = document.getElementById('clickableHeart');
             const giftMessage = document.getElementById('giftMessage');
+
             setTimeout(() => {
                 firstMessage.style.animation = 'fadeOut 1s forwards';
                 setTimeout(() => {
@@ -266,6 +231,7 @@
                     secondMessage.style.animation = 'fadeInMessage 3s forwards';
                 }, 1000); 
             }, 2500); 
+
             clickableHeart.addEventListener('click', () => {
                 secondMessage.style.animation = 'fadeOut 1s forwards';
                 setTimeout(() => {
@@ -279,30 +245,30 @@
             function shootFireworks(delay) {
                 setTimeout(() => {
                     function createFirework(x, y) {
-                        const colors = ['#ff0', '#f0f', '#0ff', '#f00', '#0f0', '#00f', '#ff99cc', '#ffffff'];
-                        const numParticles = 45;
+                        const colors = ['#ff0066', '#ffcc00', '#00ff00', '#00ffff', '#ffffff'];
+                        const numParticles = 50;
                         for (let i = 0; i < numParticles; i++) {
                             const particle = document.createElement('div');
                             particle.classList.add('firework');
                             particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                             const angle = Math.random() * Math.PI * 2;
-                            const distance = Math.random() * 150 + 50;
+                            const distance = Math.random() * 200 + 50;
                             const targetX = x + Math.cos(angle) * distance;
                             const targetY = y + Math.sin(angle) * distance;
                             particle.style.setProperty('--fx', `${x}px`); particle.style.setProperty('--fy', `${y}px`);
                             particle.style.setProperty('--tx', `${targetX}px`); particle.style.setProperty('--ty', `${targetY}px`);
-                            particle.style.animationDelay = `${Math.random() * 0.3}s`;
+                            particle.style.animationDelay = `${Math.random() * 0.2}s`;
                             document.body.appendChild(particle);
                             particle.addEventListener('animationend', () => particle.remove());
                         }
                     }
-                    const numFireworks = 8;
+                    const numFireworks = 10;
                     for (let i = 0; i < numFireworks; i++) {
                         setTimeout(() => {
                             const randomX = Math.random() * window.innerWidth;
-                            const randomY = Math.random() * window.innerHeight * 0.5 + window.innerHeight * 0.1;
+                            const randomY = Math.random() * window.innerHeight * 0.6;
                             createFirework(randomX, randomY);
-                        }, i * 350);
+                        }, i * 300);
                     }
                 }, delay);
             }
